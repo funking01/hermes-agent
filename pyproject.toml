@@ -390,21 +390,12 @@ hermes-agent = "run_agent:main"
 hermes-acp = "acp_adapter.entry:main"
 
 [tool.uv]
+index-strategy = "unsafe-best-match"
+
 override-dependencies = [
-  # discord.py's latest published version, 2.7.1, pins pynacl at <1.6. however, pynacl 1.5.0 has known vulnerabilities.
-  # discord.py has updated pynacl to 1.6 on `main`, but has not yet published a patch release.
-  # so, we force-override this to pynacl 1.6. here.
-  # remove this when we update discord.py
   "pynacl>=1.6,<1.7",
-  # alibabacloud-tea-openapi caps cryptography<49, and its latest release
-  # still does. Without this override, that cap holds cryptography at 48.0.1
-  # and its three advisories (see the cryptography pin in
-  # [project].dependencies). The package uses cryptography only to sign
-  # requests with RSA and AES, and that API did not break in 49 or 50.
-  # Remove this line when alibabacloud-tea-openapi lifts the cap.
   "cryptography>=50,<51",
 ]
-exclude-newer = "14 days"
 # h2: temporary exclude-newer exception for the CVE-2026-71554 (GHSA-6hr6-w5qg-qmwg,
 # request-smuggling) fix in 4.4.1, published 2026-08-03. Remove after 2026-08-17.
 # aiohttp, cryptography: same shape — the advisory fixes are newer than the

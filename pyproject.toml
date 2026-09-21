@@ -56,7 +56,6 @@ dependencies = [
   # has long expired). tools/lazy_deps.py `tool.doc_extract` remains the
   # self-heal path for lean/broken installs — keep the pin below and the
   # lazy pin in lockstep.
-  "firecrawl-anydoc==0.2.4",
   # Bumped from 2.12.5 to 2.13.4 to pull in pydantic-core 2.46.4.
   # pydantic-core 2.41.5 (pulled by 2.12.5) segfaults when the OpenAI SDK's
   # Responses API resource is exercised from a non-main thread, which is the
@@ -424,7 +423,6 @@ override-dependencies = [
 # firecrawl-anydoc: same exact-pin shape (==0.2.4, hosted-OCR wiring PR).
 # The pin bump WAS the review; exclude-newer adds zero float protection to
 # an exact pin and would only delay the reviewed version 14 days.
-exclude-newer-package = { vercel = false, nemo-relay = false, huggingface_hub = false, h2 = false, aiohttp = false, cryptography = false, defusedxml = false, python-olm = false, unpaddedbase64 = false, setuptools = false, pillow = false, mcp = false, firecrawl-anydoc = false }
 
 [tool.setuptools]
 # Top-level single-file modules (not packages). Without this, uv2nix's
